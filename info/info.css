@@ -1,0 +1,8 @@
+.content {
+    width: 1000px;
+    display: block;
+    color: black;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    margin: 10px auto;
+}
