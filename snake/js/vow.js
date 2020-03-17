@@ -1,10 +1,10 @@
-let topscore = 0; //найкращий результат
-tor(); //викликаємо основну функцію
+let topscore = 0; 
+tor();
 
 function tor() {
     const canvas = document.getElementById("game");
     const ctx = can.getContext("2d");
-    //підключаємо канвас на якому і буде малюватися наша змія
+   
     const cupimg = new Image();
     cupimg.src = "img/cup.png";
     const snake1 = new Image();
@@ -19,17 +19,17 @@ function tor() {
     let score = 0;
     const bc = new Image();
     bc.src = "img/bc.jpg";
-    //підключаємо основні зображення та змінні
+
 
     let food = {
         x: Math.floor((Math.random() * 24)) * box,
         y: Math.floor((Math.random() * 18 + 1)) * box,
-    }; //координати їжі 
+    };
     let snake = [];
     snake[0] = {
         x: 12 * box,
         y: 10 * box
-    }; //початкові координати змії
+    };
 
     document.addEventListener("keydown", direction);
     let dir;
@@ -78,10 +78,6 @@ function tor() {
         }, false);
 
 
-
-//масив по ітераціях
-
-
     function eatTail(head, arr) {
         for (let i = 0; i < arr.length; i++) {
             if (head.x == arr[i].x && head.y == arr[i].y) {
@@ -96,7 +92,7 @@ function tor() {
                 }
             }
         }
-    } //перевірка на те чи ми не програли
+    }
 
     function drawGame() {
         ctx.drawImage(bc, 0, 0);
@@ -108,7 +104,7 @@ function tor() {
         for (let i = 1; i < snake.length; i++) {
             ctx.drawImage(snake1, snake[i].x, snake[i].y, 32, 32);
         }
-        //відображуємо наші зображення 
+     
 
         ctx.fillStyle = "red";
         ctx.font = "32px Arial";
@@ -117,10 +113,10 @@ function tor() {
             topscore = score;
         }
         ctx.fillText(topscore, 238, 30);
-        //відображаємо наш рахунок в грі
+        
         let snakeX = snake[0].x;
         let snakeY = snake[0].y;
-        //змінні для перевірки (голова змії)
+        
         if (snakeX == food.x && snakeY == food.y) {
             score++;
             food = {
@@ -129,7 +125,7 @@ function tor() {
             };
         } else {
             snake.pop();
-        } //якщо ми зїли їжу то малюємо її в новому місці, якщо ні то малюємоо змію в інших координатах
+        }
         if (snakeX < 0 || snakeX > 768 ||
             snakeY < 32 || snakeY > 620) {
             clearInterval(game);
@@ -140,23 +136,23 @@ function tor() {
                 alert("щасти!!");
                 tor();
             }
-        } //перевірка чи ми не вийшли за межі ігрового поля
+        }
 
         if (dir == "left") snakeX -= box;
         if (dir == "right") snakeX += box;
         if (dir == "up") snakeY -= box;
         if (dir == "down") snakeY += box;
-        //рух змії
+     
         let newHead = {
             x: snakeX,
             y: snakeY
         };
 
-        eatTail(newHead, snake); //виклик функції перевірки чи ми не програли
+        eatTail(newHead, snake); 
 
-        snake.unshift(newHead); //добавлення тіла змії
+        snake.unshift(newHead); 
 
     }
     let game = setInterval(drawGame, 100);
-    //виклик функції з певною частотою аби рух змії був більш менш плавний
+    
 }
